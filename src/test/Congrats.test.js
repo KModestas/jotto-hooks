@@ -21,7 +21,6 @@ test('renders without crashing', () => {
 test("renders no text when 'success' prop is false", () => {
 	const wrapper = setup()
 	const component = findByTestAttr(wrapper, 'component-congrats')
-	console.debug('wrapper ', wrapper)
 	expect(component.text()).toBe('')
 })
 

@@ -4,7 +4,7 @@ import GuessedWords from './GuessedWords'
 
 const App = props => {
 	return (
-		<div className='container'>
+		<div data-test='component-app' className='container'>
 			<h1>Jotto</h1>
 			<b>Secret Word: {props.secretWord}</b>
 			<Congrats success={props.success} />
