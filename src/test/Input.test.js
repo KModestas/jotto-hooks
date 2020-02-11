@@ -19,8 +19,9 @@ test('Does not throw warning with expected props ', () => {
 
 describe('state controlled input field', () => {
 	test('state updates value of input box on change', () => {
-		// set up a mock function and replace react.useState with it
+		// set up a mock function to mickim setState
 		const mockSetCurrentGuess = jest.fn()
+		// set up another mock function and replace react.useState with it
 		React.useState = jest.fn(() => ['', mockSetCurrentGuess])
 
 		const wrapper = setup()
@@ -31,5 +32,15 @@ describe('state controlled input field', () => {
 		inputBox.simulate('change', mockEvent)
 
 		expect(mockSetCurrentGuess).toHaveBeenCalledWith('train')
+	})
+	test('field is cleared upon submit', () => {
+		const mockSetCurrentGuess = jest.fn()
+		React.useState = jest.fn(() => ['', mockSetCurrentGuess])
+
+		const wrapper = setup()
+		const submitButton = findByTestAttr(wrapper, 'submit-button')
+
+		submitButton.simulate('click')
+		expect(mockSetCurrentGuess).toHaveBeenCalledWith('')
 	})
 })
