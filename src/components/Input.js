@@ -5,19 +5,21 @@ const Input = ({ secretWord }) => {
 	// should not destructure hooks from React for test mocks to work
 	const [currentGuess, setCurrentGuess] = React.useState('')
 	return (
-		<form className='form-inline'>
-			<input
-				data-test='input-box'
-				className='mb-2 mx-sm-3'
-				type='text'
-				placeholder={''}
-				onChange={e => setCurrentGuess(e.target.value)}
-				value={currentGuess}
-			/>
-			<button data-test='submit-button' className='btn btn-primary mb-2'>
-				submit
-			</button>
-		</form>
+		<div data-test='component-input'>
+			<form className='form-inline'>
+				<input
+					data-test='input-box'
+					className='mb-2 mx-sm-3'
+					type='text'
+					placeholder={''}
+					onChange={e => setCurrentGuess(e.target.value)}
+					value={currentGuess}
+				/>
+				<button data-test='submit-button' className='btn btn-primary mb-2'>
+					submit
+				</button>
+			</form>
+		</div>
 	)
 }
 

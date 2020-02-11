@@ -9,10 +9,27 @@ const setup = (secretWord = 'party') => {
 
 test('Input renders without error', () => {
 	const wrapper = setup()
-	const input = findByTestAttr(wrapper, 'component-input')
-	expect(input.length).toBe(1)
+	const inputComponent = findByTestAttr(wrapper, 'component-input')
+	expect(inputComponent.length).toBe(1)
 })
 
 test('Does not throw warning with expected props ', () => {
 	checkProps(Input, { secretWord: 'party' })
+})
+
+describe('state controlled input field', () => {
+	test('state updates value of input box on change', () => {
+		// set up a mock function and replace react.useState with it
+		const mockSetCurrentGuess = jest.fn()
+		React.useState = jest.fn(() => ['', mockSetCurrentGuess])
+
+		const wrapper = setup()
+		const inputBox = findByTestAttr(wrapper, 'input-box')
+
+		// create an onChange mock event passing the input a value of 'train' whenever the mockSetCurrentGuess runs
+		const mockEvent = { target: { value: 'train' } }
+		inputBox.simulate('change', mockEvent)
+
+		expect(mockSetCurrentGuess).toHaveBeenCalledWith('train')
+	})
 })
