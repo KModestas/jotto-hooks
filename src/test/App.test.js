@@ -1,12 +1,14 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { findByTestAttr } from './testUtils'
 import App from '../components/App'
 
+// scoping globally
+const mockSecretWord = jest.fn()
+
 const setup = () => {
-	return shallow(
-		<App success={false} guessedWords={[{ guessedWord: 'yo', letterMatchCount: 0 }]} />
-	)
+	// using mount instead of shallow which is not yet usable with useEffect
+	return mount(<App success={false} guessedWords={[{ guessedWord: 'yo', letterMatchCount: 0 }]} />)
 }
 
 test('App renders without error', () => {
