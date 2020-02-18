@@ -12,7 +12,7 @@ const setup = () => {
 	// clear mock function
 	mockSecretWord.mockClear()
 	// replace the real function with mock
-	hookActions.secretWord = mockSecretWord
+	hookActions.getSecretWord = mockSecretWord
 	// using mount instead of shallow which is not yet usable with useEffect
 	return mount(<App success={false} guessedWords={[{ guessedWord: 'yo', letterMatchCount: 0 }]} />)
 }
@@ -28,5 +28,12 @@ describe('getSecretWord', () => {
 		setup()
 		expect(mockSecretWord).toHaveBeenCalled()
 	})
-	test('is called on app Mount', () => {})
+	test('does not update on App update', () => {
+		const wrapper = setup()
+		// mock will be called on mount, clear the mock and then start fresh to see if it gets triggered again on update
+		mockSecretWord.mockClear()
+		// for useEffect .update doesnt work, use setProps instead
+		wrapper.setProps()
+		expect(mockSecretWord).not.toHaveBeenCalled()
+	})
 })
