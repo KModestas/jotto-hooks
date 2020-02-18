@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { findByTestAttr } from './testUtils'
-import App from '../components/App'
+import App from '../App'
 
 import hookActions from '../redux/actions/hookActions'
 

@@ -1,7 +1,8 @@
 import React from 'react'
-import Congrats from './Congrats'
-import GuessedWords from './GuessedWords'
-import hookActions from '../redux/actions/hookActions'
+import Congrats from './components/Congrats'
+import GuessedWords from './components/GuessedWords'
+import hookActions from './redux/actions/hookActions'
+import Input from './components/Input'
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -24,9 +25,7 @@ const App = props => {
 	return (
 		<div data-test='component-app' className='container'>
 			<h1>Jotto</h1>
-			<b>Secret Word: {props.secretWord}</b>
-			<Congrats success={props.success} />
-			<GuessedWords guessedWords={props.guessedWords} />
+			<Input secretWord={state.secretWord} />
 		</div>
 	)
 }
