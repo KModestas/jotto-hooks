@@ -33,7 +33,7 @@ const App = props => {
 	}
 
 	return (
-		<div data-test='component-app' className='container'>
+		<div className='container' data-test='component-app'>
 			<h1>Jotto</h1>
 			<Input secretWord={state.secretWord} />
 		</div>
