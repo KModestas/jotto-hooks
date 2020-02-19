@@ -20,3 +20,21 @@ test('does not throw warning setLanguagewith expected props', () => {
 	// setLanguage should be a func so just pass in a mock function to pass the test
 	checkProps(LanguagePicker, { setLanguage: jest.fn() })
 })
+
+test('renders language icons', () => {
+	const wrapper = setup()
+	// if theres more than one language-icon, an array is returned
+	const languageIcons = findByTestAttr(wrapper, 'language-icon')
+	expect(languageIcons.length).toBeGreaterThan(0)
+})
+
+test('calls setLanguage prop upon click', () => {
+	const wrapper = setup()
+	const languageIcons = findByTestAttr(wrapper, 'language-icon')
+
+	// .first gets first element in array
+	const firstIcon = languageIcons.first()
+	firstIcon.simulate('click')
+
+	expect(mockSetLanguage).toHaveBeenCalled()
+})
