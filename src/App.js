@@ -22,6 +22,16 @@ const App = props => {
 		hookActions.getSecretWord(setSecretWord)
 	}, [])
 
+	if (!state.secretWord) {
+		return (
+			<div className='container' data-test='spinner'>
+				<div className='spinner-border' role='status'>
+					<span className='sr-only'>Loading...</span>
+				</div>
+			</div>
+		)
+	}
+
 	return (
 		<div data-test='component-app' className='container'>
 			<h1>Jotto</h1>
