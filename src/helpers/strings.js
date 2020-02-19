@@ -1,3 +1,5 @@
+import { string } from 'prop-types'
+
 const languageStrings = {
 	en: {
 		congrats: 'Congratulations! You guessed the word!',
@@ -20,7 +22,13 @@ const languageStrings = {
 }
 
 // test verison of strings is passed in
-const getStringByLanguage = (languageCode, stringKey, testStrings = languageStrings) => {}
+const getStringByLanguage = (languageCode, stringKey, strings = languageStrings) => {
+	if (!strings[languageCode] || !strings[languageCode][stringKey]) {
+		// fall back to english
+		return strings.en[stringKey]
+	}
+	return strings[languageCode][stringKey]
+}
 
 // for future mocking
 export default {
