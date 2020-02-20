@@ -6,7 +6,6 @@ import languageContext from '../contexts/languageContext'
 
 const Input = ({ secretWord }) => {
 	const language = React.useContext(languageContext)
-	// should not destructure hooks from React for test mocks to work
 	const [currentGuess, setCurrentGuess] = React.useState('')
 	return (
 		<div data-test='component-input'>

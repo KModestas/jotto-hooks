@@ -16,7 +16,7 @@ const setup = (secretWord = 'party') => {
 	hookActions.getSecretWord = mockSecretWord
 
 	// create mock useReducer and replace
-	const mockUseReducer = jest.fn().mockReturnValue([{ secretWord }, jest.fn()])
+	const mockUseReducer = jest.fn().mockReturnValue([{ secretWord, language: 'en' }, jest.fn()])
 	React.useReducer = mockUseReducer
 
 	// using mount instead of shallow which is not yet usable with useEffect
