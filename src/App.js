@@ -22,7 +22,7 @@ const App = props => {
 	const [state, dispatch] = React.useReducer(reducer, { secretWord: null, language: 'en' })
 
 	const setSecretWord = secretWord => dispatch({ type: 'setSecretWord', payload: secretWord })
-	const setLanguage = secretWord => dispatch({ type: 'setLanguage', payload: language })
+	const setLanguage = language => dispatch({ type: 'setLanguage', payload: language })
 
 	React.useEffect(() => {
 		hookActions.getSecretWord(setSecretWord)
