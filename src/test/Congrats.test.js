@@ -1,25 +1,40 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 import { findByTestAttr, checkProps } from './testUtils'
+import languageContext from '../contexts/languageContext'
 import Congrats from '../components/Congrats'
 
-// declare default props to be passed into components when testing. Make sure these prop mimick actual props in your application, otherwise tests may pass when they actually shouldn't
-const defaultProps = { success: false }
+const setup = ({ success = false, language = 'en' }) => {
+	// language = language || 'en'
+	// success = success || false
 
-const setup = (props = {}) => {
-	const setupProps = { ...defaultProps, ...props }
-	return shallow(<Congrats {...setupProps} />)
+	return mount(
+		<languageContext.Provider value={language}>
+			<Congrats success={success} />
+		</languageContext.Provider>
+	)
 }
 
+describe('language picker', () => {
+	test('correctly renders congrats string in English by default', () => {
+		const wrapper = setup({ success: true })
+		expect(wrapper.text()).toBe('Congratulations! You guessed the word!')
+	})
+	test('correctly renders congrats string in emoji', () => {
+		const wrapper = setup({ success: true, language: 'emoji' })
+		expect(wrapper.text()).toBe('🎯🎉')
+	})
+})
+
 test('renders without crashing', () => {
-	const wrapper = setup()
+	const wrapper = setup({})
 	const component = findByTestAttr(wrapper, 'component-congrats')
 	expect(component.length).toBe(1)
 })
 
 test("renders no text when 'success' prop is false", () => {
-	const wrapper = setup()
+	const wrapper = setup({ success: false })
 	const component = findByTestAttr(wrapper, 'component-congrats')
 	expect(component.text()).toBe('')
 })
