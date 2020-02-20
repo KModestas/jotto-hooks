@@ -2,6 +2,7 @@ import React from 'react'
 
 const successContext = React.createContext()
 
+// custom hook
 const useSuccess = () => {
 	const context = React.useContext(successContext)
 
@@ -10,6 +11,7 @@ const useSuccess = () => {
 	return context
 }
 
+// HOC providing value and setValue
 const SuccessProvider = props => {
 	const [success, setSuccess] = React.useState(false)
 
