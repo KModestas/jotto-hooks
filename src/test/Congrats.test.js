@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 
 import { findByTestAttr, checkProps } from './testUtils'
 import languageContext from '../contexts/languageContext'
@@ -17,7 +17,7 @@ const setup = ({ success = false, language = 'en' }) => {
 }
 
 describe('language picker', () => {
-	test('correctly renders congrats string in English by default', () => {
+	test('correctly renders congrats string in english', () => {
 		const wrapper = setup({ success: true })
 		expect(wrapper.text()).toBe('Congratulations! You guessed the word!')
 	})
