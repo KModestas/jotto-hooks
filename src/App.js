@@ -1,11 +1,12 @@
 import React from 'react'
 import hookActions from './redux/actions/hookActions'
 import languageContext from './contexts/languageContext'
+import sucessContext from './contexts/sucessContext'
 
 import Congrats from './components/Congrats'
 import GuessedWords from './components/GuessedWords'
 import Input from './components/Input'
-import languagePicker, { LanguagePicker } from './components/LanguagePicker'
+import LanguagePicker from './components/LanguagePicker'
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -43,7 +44,11 @@ const App = props => {
 			<h1>Jotto</h1>
 			<languageContext.Provider value={state.language}>
 				<LanguagePicker setLanguage={setLanguage} />
-				<Input secretWord={state.secretWord} />
+				<sucessContext.SuccessProvider>
+					<Congrats />
+					<Input secretWord={state.secretWord} />
+				</sucessContext.SuccessProvider>
+				{/* <GuessedWords /> */}
 			</languageContext.Provider>
 		</div>
 	)
