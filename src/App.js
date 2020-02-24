@@ -1,7 +1,7 @@
 import React from 'react'
 import hookActions from './redux/actions/hookActions'
 import languageContext from './contexts/languageContext'
-import sucessContext from './contexts/sucessContext'
+import successContext from './contexts/successContext'
 
 import Congrats from './components/Congrats'
 import GuessedWords from './components/GuessedWords'
@@ -44,10 +44,10 @@ const App = props => {
 			<h1>Jotto</h1>
 			<languageContext.Provider value={state.language}>
 				<LanguagePicker setLanguage={setLanguage} />
-				<sucessContext.SuccessProvider>
+				<successContext.SuccessProvider>
 					<Congrats />
 					<Input secretWord={state.secretWord} />
-				</sucessContext.SuccessProvider>
+				</successContext.SuccessProvider>
 				{/* <GuessedWords /> */}
 			</languageContext.Provider>
 		</div>

@@ -1,10 +1,12 @@
 import React from 'react'
 
 import languageContext from '../contexts/languageContext'
+import successContext from '../contexts/successContext'
 import strings from '../helpers/strings'
 
 const Congrats = () => {
-	const success = null
+	// no need to destructure setter
+	const [success] = successContext.useSuccess()
 	const language = React.useContext(languageContext)
 
 	if (success) {

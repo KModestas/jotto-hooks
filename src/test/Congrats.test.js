@@ -3,6 +3,7 @@ import { mount } from 'enzyme'
 
 import { findByTestAttr } from './testUtils'
 import languageContext from '../contexts/languageContext'
+import successContext from '../contexts/successContext'
 import Congrats from '../components/Congrats'
 
 const setup = ({ success = false, language = 'en' }) => {
@@ -11,7 +12,10 @@ const setup = ({ success = false, language = 'en' }) => {
 
 	return mount(
 		<languageContext.Provider value={language}>
-			<Congrats />
+			{/* override success provider value by passing in value prop */}
+			<successContext.SuccessProvider value={[success, jest.fn()]}>
+				<Congrats />
+			</successContext.SuccessProvider>
 		</languageContext.Provider>
 	)
 }
@@ -45,7 +49,7 @@ test("renders non-empty congrats message when 'success' is true", () => {
 	expect(message.text().length).not.toBe(0)
 })
 
-test('does not throw warning with expected props', () => {
-	const expectedProps = { success: false }
-	checkProps(Congrats, expectedProps)
-})
+// test('does not throw warning with expected props', () => {
+// 	const expectedProps = { success: false }
+// 	checkProps(Congrats, expectedProps)
+// })
