@@ -19,12 +19,10 @@ export const useGuessedWords = () => {
 export const GuessedWordsProvider = props => {
 	// create state that will be used within the provider
 	const [guessedWords, setGuessedWords] = React.useState([])
-
 	// value for the context provider will be array of [value, setter] for guessedWords state
 	// useMemo just ensures that the provider value will only update when guessedWords updates
 	// No need to test this -- React tests useMemo for us!
 	const value = React.useMemo(() => [guessedWords, setGuessedWords], [guessedWords])
-
 	// Return a Provider component with the [value, setter] array as the value, passing through the props
 	return <guessedWordsContext.Provider value={value} {...props} />
 }
