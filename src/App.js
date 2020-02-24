@@ -2,6 +2,7 @@ import React from 'react'
 import hookActions from './redux/actions/hookActions'
 import languageContext from './contexts/languageContext'
 import successContext from './contexts/successContext'
+import guessedWordsContext from './contexts/guessedWordsContext'
 
 import Congrats from './components/Congrats'
 import GuessedWords from './components/GuessedWords'
@@ -44,11 +45,15 @@ const App = props => {
 			<h1>Jotto</h1>
 			<languageContext.Provider value={state.language}>
 				<LanguagePicker setLanguage={setLanguage} />
-				<successContext.SuccessProvider>
-					<Congrats />
-					<Input secretWord={state.secretWord} />
-				</successContext.SuccessProvider>
-				{/* <GuessedWords /> */}
+				{/* contexts need to be completed nested within one another, so even though only guessedWords
+				and Input need it, you need to wrap the whole successContext */}
+				<guessedWordsContext.GuessedWordsProvider>
+					<successContext.SuccessProvider>
+						<Congrats />
+						<Input secretWord={state.secretWord} />
+					</successContext.SuccessProvider>
+					<GuessedWords />
+				</guessedWordsContext.GuessedWordsProvider>
 			</languageContext.Provider>
 		</div>
 	)
