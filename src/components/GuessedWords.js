@@ -2,9 +2,10 @@ import React from 'react'
 
 import strings from '../helpers/strings'
 import languageContext from '../contexts/languageContext'
+import guessedWordsContext from '../contexts/guessedWordsContext'
 
 const GuessedWords = () => {
-	const guessedWords = []
+	const [guessedWords] = guessedWordsContext.useGuessedWords()
 	const language = React.useContext(languageContext)
 	let contents
 	if (guessedWords.length === 0) {

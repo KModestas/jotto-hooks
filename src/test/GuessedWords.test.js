@@ -4,7 +4,12 @@ import { shallow } from 'enzyme'
 import { findByTestAttr } from './testUtils'
 import GuessedWords from '../components/GuessedWords'
 
+import guessedWordsContext from '../contexts/guessedWordsContext'
+
 const setup = (guessedWords = []) => {
+	// we only need the value, not the setter
+	const mockUseGuessedWords = jest.fn().mockReturnValue([guessedWords, jest.fn()])
+	guessedWordsContext.useGuessedWords = mockUseGuessedWords
 	return shallow(<GuessedWords />)
 }
 
@@ -33,7 +38,7 @@ describe('if there are words Guessed ', () => {
 		{ guessedWord: 'party', letterMatchCount: 5 }
 	]
 	beforeEach(() => {
-		wrapper = setup([])
+		wrapper = setup(guessedWords)
 	})
 	test('renders without error', () => {
 		const component = findByTestAttr(wrapper, 'component-guessed-words')
