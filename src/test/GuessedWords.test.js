@@ -1,26 +1,17 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { findByTestAttr, checkProps } from './testUtils'
+import { findByTestAttr } from './testUtils'
 import GuessedWords from '../components/GuessedWords'
 
-const defaultProps = {
-	guessedWords: [{ guessedWord: 'poo', letterMatchCount: 0 }]
+const setup = (guessedWords = []) => {
+	return shallow(<GuessedWords />)
 }
-
-const setup = props => {
-	const setupProps = { ...defaultProps, ...props }
-	return shallow(<GuessedWords {...setupProps} />)
-}
-
-test('does not throw warning with expected props', () => {
-	checkProps(GuessedWords, defaultProps)
-})
 
 describe('if there are no words guessed ', () => {
 	let wrapper
 	beforeEach(() => {
-		wrapper = setup({ guessedWords: [] })
+		wrapper = setup([])
 	})
 
 	test('renders without error', () => {
@@ -42,7 +33,7 @@ describe('if there are words Guessed ', () => {
 		{ guessedWord: 'party', letterMatchCount: 5 }
 	]
 	beforeEach(() => {
-		wrapper = setup({ guessedWords })
+		wrapper = setup([])
 	})
 	test('renders without error', () => {
 		const component = findByTestAttr(wrapper, 'component-guessed-words')
@@ -60,7 +51,7 @@ describe('if there are words Guessed ', () => {
 
 describe('languagePicker', () => {
 	test('renders guess instructions string in english by default ', () => {
-		const wrapper = setup({ guessedWords: [] })
+		const wrapper = setup([])
 		const guessInstructions = findByTestAttr(wrapper, 'guess-instructions')
 		expect(guessInstructions.text()).toBe('Try to guess the secret word!')
 	})
@@ -68,7 +59,7 @@ describe('languagePicker', () => {
 		// mock the return value of use context
 		const mockUseContext = jest.fn().mockReturnValue('emoji')
 		React.useContext = mockUseContext
-		const wrapper = setup({ guessedWords: [] })
+		const wrapper = setup([])
 		const guessedInstructions = findByTestAttr(wrapper, 'guess-instructions')
 		expect(guessedInstructions.text()).toBe('🤔🤫🔤')
 	})
