@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { findByTestAttr } from '../../test/testUtils'
+import { findByTestAttr } from '../testUtils'
 
 import successContext from '../../contexts/successContext'
 import Input from '../../components/Input'
@@ -31,10 +31,15 @@ describe('test word guesses', () => {
 			inputBox.simulate('change', mockEvent)
 			submitButton.simulate('click')
 		})
+		test('Input components contains no children', () => {
+			const inputComponent = findByTestAttr(wrapper, 'component-input')
+			expect(inputComponent.children().length).toBe(0)
+		})
 	})
 
-	describe('incorrect guess', () => {})
-	const mockEvent = { target: { value: 'party' } }
-	inputBox.simulate('change', mockEvent)
-	submitButton.simulate('click')
+	// describe('incorrect guess', () => {})
+	// const mockEvent = { target: { value: 'party' } }
+	// inputBox.simulate('change', mockEvent)
+	// submitButton.simulate('click')
+	// test(' ', () => {})
 })

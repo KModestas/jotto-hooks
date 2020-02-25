@@ -28,6 +28,8 @@ const Input = ({ secretWord }) => {
 					className='btn btn-primary mb-2'
 					onClick={e => {
 						e.preventDefault()
+						if (currentGuess === secretWord) setSuccess(true)
+						// clear input box
 						setCurrentGuess('')
 					}}>
 					{strings.getStringByLanguage(language, 'submit')}
