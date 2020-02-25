@@ -37,9 +37,13 @@ describe('test word guesses', () => {
 		})
 	})
 
-	// describe('incorrect guess', () => {})
-	// const mockEvent = { target: { value: 'party' } }
-	// inputBox.simulate('change', mockEvent)
-	// submitButton.simulate('click')
-	// test(' ', () => {})
+	describe('incorrect guess', () => {})
+	beforeEach(() => {
+		const mockEvent = { target: { value: 'party' } }
+		inputBox.simulate('change', mockEvent)
+		submitButton.simulate('click')
+	})
+	test('Input box remains', () => {
+		expect(inputBox.exists()).toBe(true)
+	})
 })
