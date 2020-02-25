@@ -8,9 +8,6 @@ import successContext from '../contexts/successContext'
 import guessedWordsContext from '../contexts/guessedWordsContext'
 
 const setup = ({ secretWord = 'party', language = 'en', success = false }) => {
-	// language = language || 'en'
-	// secretWord = secretWord || 'party'
-
 	return mount(
 		<languageContext.Provider value={language}>
 			{/*  overrde value in successProvider */}
