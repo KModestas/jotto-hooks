@@ -5,6 +5,7 @@ import { findByTestAttr, checkProps } from './testUtils'
 import Input from '../components/Input'
 import languageContext from '../contexts/languageContext'
 import successContext from '../contexts/successContext'
+import guessedWordsContext from '../contexts/guessedWordsContext'
 
 const setup = ({ secretWord = 'party', language = 'en', success = false }) => {
 	// language = language || 'en'
@@ -12,8 +13,11 @@ const setup = ({ secretWord = 'party', language = 'en', success = false }) => {
 
 	return mount(
 		<languageContext.Provider value={language}>
+			{/*  overrde value in successProvider */}
 			<successContext.SuccessProvider value={[success, jest.fn()]}>
-				<Input secretWord={secretWord} />
+				<guessedWordsContext.GuessedWordsProvider>
+					<Input secretWord={secretWord} />
+				</guessedWordsContext.GuessedWordsProvider>
 			</successContext.SuccessProvider>
 		</languageContext.Provider>
 	)

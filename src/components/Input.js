@@ -2,12 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import strings from '../helpers/strings'
+import { getLetterMatchCount } from '../helpers'
 import languageContext from '../contexts/languageContext'
 import successContext from '../contexts/successContext'
+import guessedWordsContext from '../contexts/guessedWordsContext'
 
 const Input = ({ secretWord }) => {
 	const language = React.useContext(languageContext)
 	const [success, setSuccess] = successContext.useSuccess()
+	const [guessedWords, setGuesedWords] = guessedWordsContext.useGuessedWords()
 	const [currentGuess, setCurrentGuess] = React.useState('')
 
 	if (success) return null
@@ -28,6 +31,15 @@ const Input = ({ secretWord }) => {
 					className='btn btn-primary mb-2'
 					onClick={e => {
 						e.preventDefault()
+
+						const letteMatchCount = getLetterMatchCount(currentGuess, secretWord)
+						const newGuessedWords = [
+							...guessedWords,
+							{ guessedWord: currentGuess, letteMatchCount }
+						]
+
+						setGuesedWords(newGuessedWords)
+
 						if (currentGuess === secretWord) setSuccess(true)
 						// clear input box
 						setCurrentGuess('')
